@@ -1,0 +1,26 @@
+{
+  "name": "node-stock-market",
+  "version": "0.0.1",
+  "description": "Stock Market Portfolio Builder",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RecursiveLogic/Node-Stock-Market.git"
+  },
+  "author": "http://radiux.io/",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RecursiveLogic/Node-Stock-Market/issues"
+  },
+  "homepage": "https://github.com/RecursiveLogic/Node-Stock-Market#readme",
+  "dependencies": {
+    "bhttp": "^1.2.1",
+    "bookshelf": "^0.8.2",
+    "express": "^4.13.3",
+    "knex": "^0.8.6",
+    "pg": "^4.4.3"
+  }
+}
