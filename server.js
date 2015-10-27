@@ -4,7 +4,7 @@ var request = require('bhttp');
 var knex = require('knex');
 var bookshelf = require('bookshelf');
 
-var dataGet = require('./dataGet');
+var dataGet = require('./data-get');
 
 request.get(dataGet('GOOG'), {}, function(error, response) {
     console.log(response.body.toString());
