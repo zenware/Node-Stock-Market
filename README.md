@@ -1,6 +1,6 @@
 # Stock Portfolio
 
-This is a project that serves as a platform to build a stock market portfolio and track stocks. Its currently being worked on'. 
+This is a project that serves as a platform to build a stock market portfolio and track stocks. It's currently being worked on. 
 
 ## Usage
 
