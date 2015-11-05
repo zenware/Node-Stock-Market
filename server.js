@@ -2,7 +2,6 @@ var express = require('express'), app = express();
 var request = require('bhttp');
 var readline = require('readline');
 var secret = require('./secret');
-var pg = require('pg');
 var rl = readline.createInterface(process.stdin, process.stdout);
 
 var knex = require('knex');
@@ -13,12 +12,13 @@ var knex = require('knex')({
         host: '127.0.0.1',
         user: 'Rex',
         password: '',
-        database: 'Rex',
+        database: 'WSL',
         charset: 'UTF8'
     }
 });
 
 var bookshelf = require('bookshelf')(knex);
+var pg = require('pg');
 
 var Portfolio = bookshelf.Model.extend({
     tableName: 'stocks',
