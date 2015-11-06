@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/RecursiveLogic/Node-Stock-Market#readme",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "bhttp": "^1.2.1",
     "bookshelf": "^0.8.2",
     "express": "^4.13.3",
