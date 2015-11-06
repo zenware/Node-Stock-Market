@@ -12,7 +12,7 @@ var knex = require('knex')({
         host: '127.0.0.1',
         user: 'Rex',
         password: '',
-        database: 'WSL',
+        database: 'NSM',
         charset: 'UTF8'
     }
 });
