@@ -24,13 +24,13 @@ var Portfolio = bookshelf.Model.extend({
     tableName: 'stocks',
 });
 
-var getData = require('./get-data');
+var formatQuery = require('./format-query');
 
 rl.setPrompt('-> ');
 rl.prompt();
 
 rl.on('line', function(line) {
-    var query = getData(line);
+    var query = formatQuery(line);
     request.get(query, {}, function(error, response) {
         if (error) console.log('Exec error: ' + error);
         console.log(response.body.toString());
