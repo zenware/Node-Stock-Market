@@ -1,7 +1,6 @@
 var express = require('express'), app = express();
 var request = require('bhttp');
 var readline = require('readline');
-var secret = require('./secret');
 var rl = readline.createInterface(process.stdin, process.stdout);
 
 var knex = require('knex');
@@ -25,6 +24,7 @@ var Portfolio = bookshelf.Model.extend({
 });
 
 var formatQuery = require('./format-query');
+var formatData = require('./format-data');
 
 rl.setPrompt('-> ');
 rl.prompt();
@@ -33,7 +33,9 @@ rl.on('line', function(line) {
     var query = formatQuery(line);
     request.get(query, {}, function(error, response) {
         if (error) console.log('Exec error: ' + error);
-        console.log(response.body.toString());
+        console.log(response.body.toString() + '\n');
+        var data = formatData(response.body.toString());
+        console.log(data);
         rl.prompt();
     });
 });
