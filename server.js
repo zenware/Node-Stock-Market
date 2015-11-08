@@ -4,7 +4,7 @@ var readline = require('readline');
 var pg = require('pg');
 var rl = readline.createInterface(process.stdin, process.stdout);
 
-var dbConfig = require('knex')({
+var knex = require('knex')({
     client: 'postgresql',
     connection: {
         host: '127.0.0.1',
@@ -15,13 +15,7 @@ var dbConfig = require('knex')({
     }
 });
 
-var knex = require('knex')(dbConfig);
-
 var bookshelf = require('bookshelf')(knex);
-
-var Portfolio = bookshelf.Model.extend({
-    tableName: 'stocks',
-});
 
 var formatQuery = require('./format-query');
 var formatData = require('./format-data');
