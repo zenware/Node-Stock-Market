@@ -1,7 +1,7 @@
 var express = require('express'), app = express();
 var request = require('bhttp');
 var readline = require('readline');
-// var pg = require('pg');
+var dbSchema = require('./db-schema');
 var rl = readline.createInterface(process.stdin, process.stdout);
 
 var knex = require('knex')({
@@ -30,8 +30,6 @@ rl.on('line', function(line) {
         rl.prompt();
     });
 });
-
-knex.select().table('test');
 
 app.listen(6446, function () {
     console.log('\nServer running on port: 6446');
