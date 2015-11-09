@@ -5,7 +5,7 @@ var pg = require('pg');
 var rl = readline.createInterface(process.stdin, process.stdout);
 
 var knex = require('knex')({
-    client: 'postgresql',
+    client: 'pg',
     connection: {
         host: '127.0.0.1',
         user: 'test',
