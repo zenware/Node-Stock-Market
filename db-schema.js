@@ -45,7 +45,7 @@ module.exports = {
     },
     stock_price: {
         nullable: false,
-        price: { type: 'decimal' }
+        price: { type: 'decimal' },
         stock_id: true,
         timestamp: 'timestamp',
         type: 'increments'
