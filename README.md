@@ -12,4 +12,6 @@ Functionality to query multiple stocks at once is in the works. For now the inte
 
 ## Development
 
-Any pull requests and comments are entirely welcome! It still needs quite a bit of setting up. First clone this repository, then run `npm install`, followed by `npm start` to get it running. A local instance of PostgreSQL is required to have this up and running.
+Any pull requests and comments are entirely welcome! It still needs quite a bit of setting up. First clone this repository, then run `npm install`, followed by `npm start` to get it running. A local instance of PostgreSQL is required to have this up and running along with a local PostgreSQL username and database name set up beforehand.
+
+For PostgreSQL set up instructions with Knex.js, refer to http://knexjs.org/
