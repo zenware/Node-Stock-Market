@@ -1,4 +1,0 @@
-CREATE TABLE Stock(
-    symbol VARCHAR(12) NOT NULL PRIMARY KEY,
-    group VARCHAR(50)
-)

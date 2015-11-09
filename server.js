@@ -1,7 +1,7 @@
 var express = require('express'), app = express();
 var request = require('bhttp');
 var readline = require('readline');
-var pg = require('pg');
+// var pg = require('pg');
 var rl = readline.createInterface(process.stdin, process.stdout);
 
 var knex = require('knex')({
@@ -15,13 +15,11 @@ var knex = require('knex')({
     }
 });
 
-var bookshelf = require('bookshelf')(knex);
-
 var formatQuery = require('./format-query');
 var formatData = require('./format-data');
 
 rl.setPrompt('›› ');
-rl.prompt();
+rl.prompt(); 
 
 rl.on('line', function(line) {
     var query = formatQuery(line);
@@ -33,6 +31,8 @@ rl.on('line', function(line) {
     });
 });
 
-var server = app.listen(6446, function () {
-    console.log('Server running on port: 6446');
+knex.select().table('test');
+
+app.listen(6446, function () {
+    console.log('\nServer running on port: 6446');
 });
