@@ -1,0 +1,12 @@
+{
+    "knex" : {
+        "client": "pg",
+        "connection": {
+            "host": "localhost",
+            "user": "user",
+            "password": "pass",
+            "database": "mydb",
+            "charset": "UTF8"
+        }
+    }
+}
