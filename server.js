@@ -1,19 +1,12 @@
+'use strict';
 var express = require('express'), app = express();
 var request = require('bhttp');
 var readline = require('readline');
 var pg = require('pg');
 var rl = readline.createInterface(process.stdin, process.stdout);
+let config = require('./config.json');
 
-var knex = require('knex')({
-    client: 'pg',
-    connection: {
-        host: '127.0.0.1',
-        user: 'test',
-        password: '',
-        database: 'NSM',
-        charset: 'UTF8'
-    }
-});
+var knex = require('knex')(config.knex);
 
 // Formats the query and data retrieved
 var formatQuery = require('./format-query');
