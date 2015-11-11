@@ -2,10 +2,10 @@
     "knex" : {
         "client": "pg",
         "connection": {
-            "host": "localhost",
-            "user": "user",
-            "password": "pass",
-            "database": "mydb",
+            "host": "127.0.0.1",
+            "user": "test",
+            "password": "",
+            "database": "NSM",
             "charset": "UTF8"
         }
     }

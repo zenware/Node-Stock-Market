@@ -1,7 +1,7 @@
 const drop = (knex, tbl) => knex.schema.dropTableIfExists(tbl);
 
 const schemas = {
-    users : function(knex){
+    users : function(knex) {
         const create = table => {
             table
             .increments('id')
@@ -19,7 +19,7 @@ const schemas = {
         return drop(knex, 'users')
         .then(() => knex.schema.createTable('users', create));
     },
-    portfolio : function(knex){
+    portfolio : function(knex) {
         const create = table => {
             table
             .increments('id')
@@ -34,7 +34,7 @@ const schemas = {
         .then(() => knex.schema.createTable('portfolio', create));
         
     },
-    stocks : function(knex){
+    stocks : function(knex) {
         const create = table => {
              table
             .increments('id')
@@ -62,7 +62,7 @@ const schemas = {
         return drop(knex, 'stocks')
         .then(() => knex.schema.createTable('stocks', create));
     },
-    stock_history : function(knex){
+    stock_history : function(knex) {
         const create = table => {
             table
             .decimal('price')
@@ -84,7 +84,7 @@ const schemas = {
 
 module.exports = schemas;
 
-if(require.main === module){
+if (require.main === module) {
     console.log('Creating tables');
     const config = require('./config.json');
     const knex = require('knex')(config.knex);
