@@ -8,12 +8,11 @@ var config = require('./config.json');
 
 var knex = require('knex')(config.knex);
 
-// Formats the query and data retrieved
 var formatQuery = require('./format-query');
 var formatData = require('./format-data');
 
-var dbSchema = require('./db-schema');
-var buildSchema = require('./build-schema');
+var dbSchema = require('./db-schema-test');
+
 
 rl.setPrompt('›› ');
 rl.prompt(); 
@@ -29,5 +28,5 @@ rl.on('line', function(line) {
 });
 
 app.listen(6446, function () {
-    console.log('\nServer running on port: 6446');
+    console.log('Server running on port: 6446');
 });

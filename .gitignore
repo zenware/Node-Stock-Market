@@ -2,3 +2,4 @@ node_modules
 *scrap.js
 *secret.js
 *npm-debug.log
+*config.json
