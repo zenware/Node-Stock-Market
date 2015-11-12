@@ -1,4 +1,5 @@
-var express = require('express'), app = express();
+var express = require('express');
+var app = express();
 var request = require('bhttp');
 var readline = require('readline');
 var pg = require('pg');
