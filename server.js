@@ -31,10 +31,16 @@ function buildTable(table) {
     });
 }
 
-knex.insert({
-    symbol: 'TEST',
-    price: 998.45
-}).into('stock');
+/* Test function */
+function insertData(symbol, price) {
+    return knex('stock').insert({
+        symbol: symbol,
+        price: price
+    }).then(function(data) {
+        if (error) console.log('Error: ' + error);
+        console.log(data);
+    });
+}
 
 rl.setPrompt('›› ');
 rl.prompt(); 
@@ -49,10 +55,7 @@ rl.on('line', function(line) {
         console.log(qSymbol, qPrice);
 
         /* Insert values into 'stock' table */
-        knex('stock').insert({
-            symbol: qSymbol,
-            price: qPrice
-        });
+        insertData(qSymbol, qPrice);
 
         // console.log(data);
         rl.prompt();
