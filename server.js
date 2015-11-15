@@ -36,9 +36,10 @@ function insertData(symbol, price) {
     return knex('stock').insert({
         symbol: symbol,
         price: price
-    }).then(function(data) {
-        if (error) console.log('Error: ' + error);
-        console.log(data);
+    }).then(function() {
+        knex('stock').count('symbol').then(function(data) {
+            console.log(data);
+        });
     });
 }
 
@@ -50,12 +51,19 @@ rl.on('line', function(line) {
     request.get(query, {}, function(error, response) {
         if (error) console.log('Exec error: ' + error);
         var data = formatData(response.body.toString());
-        /* Symbol & Price */
-        var qSymbol = data.t, qPrice = Number(data.l);
-        console.log(qSymbol, qPrice);
+        /* Stock Data */
+        var dataObject = {
+            symbol: data.t,
+            price: Number(data.l),
+            priceChange: data.c,
+            percentChange: Number(data.cp_fix),
+            date: data.lt_dts
+        };
+
+        console.log(dataObject);
 
         /* Insert values into 'stock' table */
-        insertData(qSymbol, qPrice);
+        // insertData(qSymbol, qPrice);
 
         // console.log(data);
         rl.prompt();
