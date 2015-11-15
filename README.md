@@ -1,14 +1,14 @@
 # Stock Portfolio
 
-This is a project that serves as a platform to build a stock market portfolio and track stocks. It's currently being worked on. 
+This is virtual stock market trading platform / stock tracker that's currently being built. Users will start with 100k USD to use on the stock market to test their wits against Wall Street.
 
 ## Usage
 
-First clone this repository and run `npm install`, follwed by `npm start` to start it up. After that, just enter a stock symbol, followed by spaces in between to pull data on multiple stocks at once. Have fun!
+First clone this repository and run `npm install`, followed by `npm start` to start it up. After that, just enter a stock symbol, followed by spaces in between to pull data on multiple stocks at once. Have fun!
 
 ## Recent Updates
 
-Functionality to query multiple stocks at once is in the works. For now the interface will be through the command line until more functionality is worked out. After which, the construction of the GUI will commence.
+Functionality to query multiple stocks at once is in the works. For now the interface will be through the command line until more functionality is worked out. Integration to a PostgreSQL database and the construction of a data schema is now being worked on.
 
 ## Development
 

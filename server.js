@@ -13,10 +13,10 @@ var formatQuery = require('./format-query');
 var formatData = require('./format-data');
 
 // var dbSchema = require('./db-schema-test');
-if (fromScratch) buildTable('stock');
+// if (fromScratch) buildTable('stock');
 
 /* Test function */
-function buildTable(table) {
+function buildStockTable(table) {
     return knex.schema.hasTable(table).then(function(exists) {
         if (!exists) {
             return knex.schema.createTable(table, function(t) {
@@ -25,23 +25,69 @@ function buildTable(table) {
                     .primary();
                 t.decimal('price')
                     .notNullable();
+                t.string('date', 20)
+                    .notNullable();
             });
         }
         console.log('Table Exists');
     });
 }
 
-/* Test function */
-function insertData(symbol, price) {
-    return knex('stock').insert({
+function buildUserTable(table) {
+    return knex.schema.hasTable(table).then(function(exists) {
+        if (!exists) {
+            return knex.schema.createTable(table, function(t) {
+                t.increments('id')
+                    .notNullable()
+                    .primary()
+                    .unique();
+                t.string('email', 50)
+                    .unique();
+                t.string('password', 25);
+            });
+        }
+    });
+}
+
+function buildPortfolioTable(table) {
+    return knex.schema.hasTable(table).then(function(exists) {
+        if (!exists) {
+            return knex.schema.createTable(table, function(t) {
+                t.increments('portfolio_id')
+                    .notNullable()
+                    .primary()
+                    .unique();
+                t.string('name', 30)
+                    .notNullable();
+            });
+        }
+    });
+}
+
+// buildTable('TestOne');
+
+/* Test functions */
+function insertSymbol(symbol, price, date) {
+    return knex('TestOne').insert({
         symbol: symbol,
-        price: price
+        price: price,
+        date: date
     }).then(function() {
-        knex('stock').count('symbol').then(function(data) {
+        knex('TestOne').count('symbol').then(function(data) {
             console.log(data);
         });
     });
 }
+
+function insertUser(username, password) {
+    return knex('user').insert({
+        username: username,
+        password: password
+    }).then(function(data) {
+        console.log(data);
+    });
+}
+/* Test functions */
 
 rl.setPrompt('›› ');
 rl.prompt(); 
@@ -51,19 +97,26 @@ rl.on('line', function(line) {
     request.get(query, {}, function(error, response) {
         if (error) console.log('Exec error: ' + error);
         var data = formatData(response.body.toString());
+
         /* Stock Data */
-        var dataObject = {
+        var stockData = {
             symbol: data.t,
+            exchange: data.e,
             price: Number(data.l),
             priceChange: data.c,
             percentChange: Number(data.cp_fix),
-            date: data.lt_dts
+            lastOpen: data.lt,
+            lastDateStamp: data.lt_dts
         };
 
-        console.log(dataObject);
+        console.log(stockData);
 
-        /* Insert values into 'stock' table */
-        // insertData(qSymbol, qPrice);
+        /* Insert symbol values into table */
+        /* insertSymbol( 
+            dataObject.symbol,
+            dataObject.price,
+            dataObject.date 
+        ); */
 
         // console.log(data);
         rl.prompt();
