@@ -1,4 +1,3 @@
-// Just testing out another schema
 var config = require('./config.json');
 var knex = require('knex')(config.knex);
 
