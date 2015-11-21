@@ -55,6 +55,10 @@ module.exports = {
                         .index('user.id');
                     t.integer('stock_id')
                         .index('stock.id');
+                    t.integer('buy_price')
+                        .notNullable();
+                    t.integer('sell_price')
+                        .notNullable();
                 });
             }
         });

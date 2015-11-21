@@ -3,6 +3,8 @@ var app = express();
 var request = require('bhttp');
 var readline = require('readline');
 var pg = require('pg');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var rl = readline.createInterface(process.stdin, process.stdout);
 var config = require('./config.json');
 var fromScratch = false;
@@ -16,7 +18,26 @@ var inputValidation = require('./input-validation');
 // var dbSchema = require('./db-schema-test');
 // if (fromScratch) buildTable('stock');
 
-/* Test function */
+rl.setPrompt('›› ');
+
+/* Test functions */
+function buildUserTable(table) {
+    return knex.schema.hasTable(table).then(function(exists) {
+        if (!exists) {
+            return knex.schema.createTable(table, function(t) {
+                t.increments('id')
+                    .notNullable()
+                    .primary()
+                    .unique();
+                t.string('username')
+                    .unique();
+                t.string('password')
+                    .notNullable();
+            });
+        }
+    });
+}
+
 function buildStockTable(table) {
     return knex.schema.hasTable(table).then(function(exists) {
         if (!exists) {
@@ -34,40 +55,22 @@ function buildStockTable(table) {
     });
 }
 
-function buildUserTable(table) {
-    return knex.schema.hasTable(table).then(function(exists) {
-        if (!exists) {
-            return knex.schema.createTable(table, function(t) {
-                t.increments('id')
-                    .notNullable()
-                    .primary()
-                    .unique();
-                t.string('email', 50)
-                    .unique();
-                t.string('password', 25);
-            });
-        }
-    });
-}
-
 function buildPortfolioTable(table) {
     return knex.schema.hasTable(table).then(function(exists) {
         if (!exists) {
             return knex.schema.createTable(table, function(t) {
-                t.increments('portfolio_id')
-                    .notNullable()
-                    .primary()
-                    .unique();
-                t.string('name', 30)
-                    .notNullable();
+                t.integer('id')
+                    .index();
+                t.integer('user_id')
+                    .index('user.id');
+                t.integer('stock_id')
+                    .index('stock.id');
             });
         }
-    });
+    })
 }
 
-// buildTable('TestOne');
-
-/* Test functions */
+/* Test insert functions */
 function insertSymbol(symbol, price, date) {
     return knex('TestOne').insert({
         symbol: symbol,
@@ -88,10 +91,24 @@ function insertUser(username, password) {
         console.log(data);
     });
 }
-/* Test functions */
 
-rl.setPrompt('›› ');
-rl.prompt(); 
+function createNewUser() {
+    rl.question('Username ›› ', function(username) {
+        rl.question('Password ›› ', function(password) {
+            console.log('Username: ' + username);
+            console.log('Password: ' + password);
+            rl.prompt();
+        });
+    });
+}
+
+rl.question('Are you a new user? ', function(answer) {
+    if (answer.match(/^y(es)?$/i)) {
+        createNewUser();
+    } else {
+        rl.prompt();
+    }
+});
 
 rl.on('line', function(line) {
     var validatedInput = inputValidation(line);
@@ -101,7 +118,7 @@ rl.on('line', function(line) {
             if (error) console.log('Exec error: ' + error);
             var data = formatData(response.body.toString());
 
-            console.log(data);
+            // console.log(data);
 
             /* Stock Data */
             var stockData = {
@@ -114,8 +131,8 @@ rl.on('line', function(line) {
                 lastDateStamp: data.lt_dts
             };
 
-            // console.log(stockData);
-
+            console.log(stockData);
+            rl.prompt();
             /* Insert symbol values into table */
             /* insertSymbol( 
                 dataObject.symbol,
@@ -124,9 +141,6 @@ rl.on('line', function(line) {
             ); */
         });
     });
-    rl.prompt();
 });
 
-app.listen(6446, function () {
-    console.log('Server running on port: 6446');
-});
+app.listen(6446);
