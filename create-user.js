@@ -37,11 +37,11 @@ function newUser() {
     });
 }
 
-function testNewUser() {
+function createNewUser() {
     rl.question('Username ›› ', function(username) {
         rl.question('Password ›› ', function(password) {
-            console.log(username);
-            console.log(password);
+            console.log('Username: ' + username);
+            console.log('Password: ' + password);
             rl.prompt();
         });
     });
@@ -49,7 +49,7 @@ function testNewUser() {
 
 rl.question('Are you a new user? ', function(answer) {
     if (answer.match(/^y(es)?$/i)) {
-        testNewUser();
+        createNewUser();
     } else {
         rl.prompt();
     }
