@@ -25,15 +25,36 @@ function buildUserTable(table) {
     });
 }
 
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ 
+            username: username 
+        }, function(error, user) {
+            if (error) { return done(error); }
+            if (!user) {
+                return done(null, false, {
+                    message: 'Incorrect username or password'
+                });
+            }
+            if (!user.validPassword(password) {
+                return done(null, false, {
+                    message: 'Incorrect username or password'
+                });
+            });
+            return done(null, user);
+        });
+    }
+));
+
 // buildUserTable('test_user');
 rl.setPrompt('›› ');
 
-function newUser() {
-    rl.question('Username ›› ', function(username) {
-        rl.prompt();
-    });
-    rl.question('Password ›› ', function(password) {
-        rl.prompt();
+function insertUser(user, pass) {
+    return knex('test_user').insert({
+        username: 'testuser1',
+        password: 'password1234'
+    }).then(function(data) { 
+        console.log(data);
     });
 }
 
