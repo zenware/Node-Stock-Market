@@ -22,6 +22,7 @@ function buildUserTable(table) {
                     .notNullable();
             });
         }
+        console.log('Table exists');
     });
 }
 
