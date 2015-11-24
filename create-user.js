@@ -17,7 +17,8 @@ function buildUserTable(table) {
                     .primary()
                     .unique();
                 t.string('username')
-                    .unique();
+                    .unique()
+                    .notNullable();
                 t.string('password')
                     .notNullable();
             });
@@ -26,7 +27,7 @@ function buildUserTable(table) {
     });
 }
 
-passport.use(new LocalStrategy(
+/* passport.use(new LocalStrategy(
     function(username, password, done) {
         User.findOne({ 
             username: username 
@@ -45,15 +46,15 @@ passport.use(new LocalStrategy(
             return done(null, user);
         });
     }
-));
+)); */
 
 // buildUserTable('test_user');
 rl.setPrompt('›› ');
 
 function insertUser(user, pass) {
     return knex('test_user').insert({
-        username: 'testuser1',
-        password: 'password1234'
+        username: user,
+        password: pass
     }).then(function(data) { 
         console.log(data);
     });
@@ -62,8 +63,7 @@ function insertUser(user, pass) {
 function createNewUser() {
     rl.question('Username ›› ', function(username) {
         rl.question('Password ›› ', function(password) {
-            console.log('Username: ' + username);
-            console.log('Password: ' + password);
+            insertUser(username, password);
             rl.prompt();
         });
     });
