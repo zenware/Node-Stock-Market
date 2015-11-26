@@ -30,13 +30,16 @@ function buildUserTable(table) {
                     .primary()
                     .unique();
                 t.string('username')
-                    .unique();
+                    .unique()
+                    .notNullable();
                 t.string('password')
                     .notNullable();
             });
         }
     });
 }
+
+// buildUserTable('user');
 
 function buildStockTable(table) {
     return knex.schema.hasTable(table).then(function(exists) {
@@ -70,7 +73,7 @@ function buildPortfolioTable(table) {
     })
 }
 
-/* Test insert functions */
+// Insert stock symbol & price into table
 function insertSymbol(symbol, price, date) {
     return knex('TestOne').insert({
         symbol: symbol,
@@ -83,25 +86,26 @@ function insertSymbol(symbol, price, date) {
     });
 }
 
-function insertUser(username, password) {
+// Insert username & password into 'user'
+function insertUser(user, pass) {
     return knex('user').insert({
-        username: username,
-        password: password
-    }).then(function(data) {
-        console.log(data);
+        username: user,
+        password: pass
+    }).then(function() { 
+        rl.prompt();
     });
 }
 
 function createNewUser() {
     rl.question('Username ›› ', function(username) {
         rl.question('Password ›› ', function(password) {
-            console.log('Username: ' + username);
-            console.log('Password: ' + password);
+            insertUser(username, password);
             rl.prompt();
         });
     });
 }
 
+// Create new user
 rl.question('Are you a new user? ', function(answer) {
     if (answer.match(/^y(es)?$/i)) {
         createNewUser();
@@ -110,6 +114,7 @@ rl.question('Are you a new user? ', function(answer) {
     }
 });
 
+// Input stock symbols & get back data
 rl.on('line', function(line) {
     var validatedInput = inputValidation(line);
     validatedInput.forEach(function(x) {

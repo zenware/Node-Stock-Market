@@ -23,7 +23,6 @@ function buildUserTable(table) {
                     .notNullable();
             });
         }
-        console.log('Table exists');
     });
 }
 
@@ -48,7 +47,7 @@ function buildUserTable(table) {
     }
 )); */
 
-// buildUserTable('test_user');
+buildUserTable('test_user');
 rl.setPrompt('›› ');
 
 function insertUser(user, pass) {
@@ -57,12 +56,14 @@ function insertUser(user, pass) {
         password: pass
     }).then(function(data) { 
         console.log(data);
+        rl.prompt();
     });
 }
 
 function createNewUser() {
     rl.question('Username ›› ', function(username) {
         rl.question('Password ›› ', function(password) {
+            console.log(username, password);
             insertUser(username, password);
             rl.prompt();
         });
