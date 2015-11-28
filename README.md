@@ -1,6 +1,6 @@
 # Stock Portfolio
 
-This is virtual stock market trading platform / stock tracker that's currently being built. Users will start with 100k USD to use on the stock market to test their wits against Wall Street.
+This is virtual stock market trading platform / stock tracker that's currently being built. It'll serve as a platform for regular users to trade in the market or as a platform for more advanced users to test machine learning trading algorithms on. Each user will start with 100k USD to use on the stock market to test their wits against Wall Street. 
 
 ## Usage
 
