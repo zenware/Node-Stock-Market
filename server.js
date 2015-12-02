@@ -39,8 +39,6 @@ function buildUserTable(table) {
     });
 }
 
-// buildUserTable('user');
-
 function buildStockTable(table) {
     return knex.schema.hasTable(table).then(function(exists) {
         if (!exists) {
@@ -122,8 +120,6 @@ rl.on('line', function(line) {
         request.get(query, {}, function(error, response) {
             if (error) console.log('Exec error: ' + error);
             var data = formatData(response.body.toString());
-
-            // console.log(data);
 
             /* Stock Data */
             var stockData = {
