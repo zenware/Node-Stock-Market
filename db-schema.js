@@ -1,7 +1,7 @@
 var config = require('./config.json');
 var knex = require('knex')(config.knex);
 
-module.exports = {
+var schema = {
     user: function() {
         return knex.schema.hasTable('user').then(function(exists) {
             if (!exists) {
