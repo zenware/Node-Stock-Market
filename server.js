@@ -15,7 +15,7 @@ var formatQuery = require('./format-query');
 var formatData = require('./format-data');
 var inputValidation = require('./input-validation');
 
-// var dbSchema = require('./db-schema-test');
+// var dbSchema = require('./db-schema');
 // if (fromScratch) buildTable('stock');
 
 rl.setPrompt('›› ');
@@ -94,6 +94,7 @@ function insertUser(user, pass) {
     });
 }
 
+// Create new user
 function createNewUser() {
     rl.question('Username ›› ', function(username) {
         rl.question('Password ›› ', function(password) {
@@ -103,7 +104,7 @@ function createNewUser() {
     });
 }
 
-// Create new user
+// Ask if user is new
 rl.question('Are you a new user? ', function(answer) {
     if (answer.match(/^y(es)?$/i)) {
         createNewUser();
