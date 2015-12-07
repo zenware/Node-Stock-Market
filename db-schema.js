@@ -1,5 +1,6 @@
 var config = require('./config.json');
 var knex = require('knex')(config.knex);
+var pg = require('pg');
 
 var schema = {
     user: function() {
