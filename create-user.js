@@ -47,7 +47,6 @@ function buildUserTable(table) {
     }
 )); */
 
-// buildUserTable('test_user');
 rl.setPrompt('›› ');
 
 function insertUser(user, pass) {
