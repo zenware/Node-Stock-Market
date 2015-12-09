@@ -26,12 +26,10 @@ function buildUserTable(table) {
         if (!exists) {
             return knex.schema.createTable(table, function(t) {
                 t.increments('id')
-                    .notNullable()
-                    .primary()
-                    .unique();
+                    .primary();
                 t.string('username')
-                    .unique()
-                    .notNullable();
+                    .notNullable().
+                    .unique();
                 t.string('password')
                     .notNullable();
             });
@@ -39,29 +37,12 @@ function buildUserTable(table) {
     });
 }
 
-function buildStockTable(table) {
-    return knex.schema.hasTable(table).then(function(exists) {
-        if (!exists) {
-            return knex.schema.createTable(table, function(t) {
-                t.string('symbol', 10)
-                    .notNullable()
-                    .primary();
-                t.decimal('price')
-                    .notNullable();
-                t.string('date', 20)
-                    .notNullable();
-            });
-        }
-        console.log('Table Exists');
-    });
-}
-
 function buildPortfolioTable(table) {
     return knex.schema.hasTable(table).then(function(exists) {
         if (!exists) {
             return knex.schema.createTable(table, function(t) {
-                t.integer('id')
-                    .index();
+                t.increments('id')
+                    .primary();
                 t.integer('user_id')
                     .index('user.id');
                 t.integer('stock_id')

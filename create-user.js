@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var readline = require('readline');
 var pg = require('pg');
+var scrypt = require('scrypt');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var rl = readline.createInterface(process.stdin, process.stdout);
@@ -26,7 +27,7 @@ function buildUserTable(table) {
     });
 }
 
-/* passport.use(new LocalStrategy(
+passport.use(new LocalStrategy(
     function(username, password, done) {
         User.findOne({ 
             username: username 
@@ -45,23 +46,22 @@ function buildUserTable(table) {
             return done(null, user);
         });
     }
-)); */
+));
 
-rl.setPrompt('›› ');
+rl.setPrompt('» ');
 
 function insertUser(user, pass) {
     return knex('test_user').insert({
         username: user,
         password: pass
     }).then(function(data) { 
-        console.log(data);
         rl.prompt();
     });
 }
 
 function createNewUser() {
-    rl.question('Username ›› ', function(username) {
-        rl.question('Password ›› ', function(password) {
+    rl.question('Username » ', function(username) {
+        rl.question('Password » ', function(password) {
             console.log(username, password);
             insertUser(username, password);
             rl.prompt();
