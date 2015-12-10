@@ -18,3 +18,7 @@ function buildPortfolioTable(table) {
         }
     })
 }
+
+rl.on('line', function(line) {
+    var caps = line.toUpperCase();
+});
