@@ -27,26 +27,15 @@ function buildUserTable(table) {
     });
 }
 
-passport.use(new LocalStrategy(
-    function(username, password, done) {
-        User.findOne({ 
-            username: username 
-        }, function(error, user) {
-            if (error) { return done(error); }
-            if (!user) {
-                return done(null, false, {
-                    message: 'Incorrect username or password'
-                });
-            }
-            if (!user.validPassword(password) {
-                return done(null, false, {
-                    message: 'Incorrect username or password'
-                });
-            });
-            return done(null, user);
-        });
-    }
-));
+function buildPortfolioTable(table) {
+    return knex.schema.hasTable(table).then(function(exists) {
+        if (!exists) {
+            return knex.schema.createTable(table, function(t) {
+                t.
+            })
+        }
+    })
+}
 
 rl.setPrompt('» ');
 

@@ -28,7 +28,7 @@ function buildUserTable(table) {
                 t.increments('id')
                     .primary();
                 t.string('username')
-                    .notNullable().
+                    .notNullable()
                     .unique();
                 t.string('password')
                     .notNullable();
